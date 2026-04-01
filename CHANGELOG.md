@@ -12,6 +12,10 @@ This project is currently in the `0.1.0-beta` release channel.
 - Added donation section to both README files.
 - Expanded documentation layout to be closer to large open-source project standards.
 
+### Commit reference
+
+- `f05a2e0` - Docs overhaul: full VN parity, donate, changelog, contributing, security.
+
 ## [0.1.0-beta.4] - 2026-04-01
 
 ### Documentation

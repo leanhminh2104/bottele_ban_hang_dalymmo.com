@@ -52,7 +52,7 @@ Built for **dalymmo.com** by **LAMDev**.
 
 | Date | Commit | Type | Summary |
 | --- | --- | --- | --- |
-| 2026-04-01 | `HEAD` | Docs | Full docs upgrade: VN parity, donate, contributing, security, support |
+| 2026-04-01 | `f05a2e0` | Docs | Full docs upgrade: VN parity, donate, contributing, security, support |
 | 2026-04-01 | `b392519` | Docs | Added version details, changelog, and split Vietnamese README |
 | 2026-04-01 | `84e64de` | Docs | Revamped README: bilingual docs, full setup, cron, usage |
 | 2026-04-01 | `2286b47` | Docs | Expanded documentation: full installation, cron setup, usage |

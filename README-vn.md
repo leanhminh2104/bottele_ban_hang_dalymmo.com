@@ -52,7 +52,7 @@ Phát triển cho **dalymmo.com** bởi **LAMDev**.
 
 | Ngày | Commit | Loại | Nội dung |
 | --- | --- | --- | --- |
-| 2026-04-01 | `HEAD` | Tài liệu | Nâng cấp docs toàn diện: VN parity, donate, contributing, security, support |
+| 2026-04-01 | `f05a2e0` | Tài liệu | Nâng cấp docs toàn diện: VN parity, donate, contributing, security, support |
 | 2026-04-01 | `b392519` | Tài liệu | Thêm chi tiết phiên bản, changelog, và tách README tiếng Việt |
 | 2026-04-01 | `84e64de` | Tài liệu | Làm mới README: song ngữ, full setup, cron, cách dùng |
 | 2026-04-01 | `2286b47` | Tài liệu | Mở rộng tài liệu: cài đặt đầy đủ, cron, vận hành |
