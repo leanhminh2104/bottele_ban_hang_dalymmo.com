@@ -1,0 +1,16 @@
+﻿{
+  "update_id": 7,
+  "message": {
+    "message_id": 7,
+    "date": 1774882100,
+    "chat": { "id": 7429925709, "type": "private" },
+    "from": {
+      "id": 7429925709,
+      "is_bot": false,
+      "first_name": "Test",
+      "username": "testuser",
+      "language_code": "vi"
+    },
+    "text": "/start"
+  }
+}
