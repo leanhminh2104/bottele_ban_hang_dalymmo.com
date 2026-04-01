@@ -1,51 +1,123 @@
-# bottele_ban_hang_dalymmo.com
+# BotTele Sales Bot for dalymmo.com
 
-Bot Telegram ban hang tai khoan so, nap tien, quan ly don hang va bao hanh.
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fleanhminh2104%2Fbottele_ban_hang_dalymmo.com&env=TOKEN,SUPABASE_URL,SUPABASE_KEY,SUPABASE_DB_URL,CRON_KEY,ADMIN_ID)
+![Node.js](https://img.shields.io/badge/Node.js-18%2B-339933?style=for-the-badge&logo=node.js&logoColor=white)
+![Vercel](https://img.shields.io/badge/Vercel-Serverless-000000?style=for-the-badge&logo=vercel&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Supabase-336791?style=for-the-badge&logo=postgresql&logoColor=white)
+![Telegram](https://img.shields.io/badge/Telegram-Bot%20API-26A5E4?style=for-the-badge&logo=telegram&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
-## Ban quyen va Tac gia
+Production-ready Telegram sales bot with top-up, order workflow, stock management, and warranty handling.
 
-- Ban quyen ma nguon: Copyright (c) 2026 dalymmo.com - LAMDev
-- Thuong hieu va tai san lien quan den dalymmo.com thuoc quyen so huu cua dalymmo.com
-- Phan ma nguon trong repo duoc phat hanh theo MIT License (xem file `LICENSE`)
-- Phat trien boi: LAMDev
+Built for **dalymmo.com** by **LAMDev**.
 
-## Tinh nang chinh
+---
 
-- Webhook Telegram: `api/bot`
-- Cron xu ly nen: `api/cron` (kiem tra thanh toan, nhan don tre han, giai phong hold)
-- Tu dong bootstrap schema database khi he thong chua co bang
-- Ho tro da ngon ngu: `vi`, `en`
-- Luong mua hang:
-- Chon danh muc -> chon san pham -> chon so luong -> chon phuong thuc thanh toan
-- Thanh toan bang so du hoac hoa don chuyen khoan
-- Theo doi don hang va gui yeu cau bao hanh
-- Luong quan tri:
-- Quan ly danh muc, san pham, ton kho
-- Import tai khoan tu text/file `.txt`
-- Duyet/Tu choi bao hanh
+## Language
 
-## Cong nghe su dung
+- English (default): this section
+- Vietnamese: jump to [Vietnamese (Tieng Viet)](#vietnamese-tieng-viet)
 
-- Node.js (ESM)
-- Vercel Functions
-- PostgreSQL (Supabase)
-- Telegram Bot API
+---
 
-## Cau truc thu muc
+## Table of Contents
 
-- `api/`: Entry point serverless (`bot.js`, `cron.js`)
-- `config/`: ENV loader, i18n, constants
-- `lib/`: Telegram client, DB, HTTP
-- `models/`: Truy van database
-- `services/`: Nghiep vu chinh
-- `scripts/`: Script ho tro (`set-webhook`, `import-accounts`)
-- `utils/`: Logger, parser, keyboard
+- [Features](#features)
+- [Architecture](#architecture)
+- [Quick Start](#quick-start)
+- [Environment Variables](#environment-variables)
+- [Webhook Setup](#webhook-setup)
+- [Cron Setup](#cron-setup)
+- [Full Deployment on Vercel](#full-deployment-on-vercel)
+- [Bot Commands](#bot-commands)
+- [Operational Flow](#operational-flow)
+- [Scripts](#scripts)
+- [Security Checklist](#security-checklist)
+- [Copyright and Credits](#copyright-and-credits)
+- [Vietnamese (Tieng Viet)](#vietnamese-tieng-viet)
 
-## Bien moi truong bat buoc
+---
 
-Tao file `.env.local` hoac `.env`:
+## Features
+
+### Core Bot
+
+- Telegram webhook endpoint: `api/bot`
+- Scheduled background endpoint: `api/cron`
+- Auto schema bootstrap flow for first-time setup
+- Multi-language support: `vi` and `en`
+
+### User Features
+
+- Browse categories and products
+- Buy with balance or invoice transfer flow
+- View account info, balance history, order history
+- Create warranty request
+
+### Admin Features
+
+- Configure payment and bank settings
+- Manage categories, products, stock
+- Import stock from text and `.txt` file
+- Handle warranty approvals and rejections
+
+### Reliability
+
+- Telegram timeout and retry controls via ENV
+- Retry backoff with jitter for unstable network conditions
+- Cron-safe processing with `CRON_KEY` authentication
+
+---
+
+## Architecture
+
+```text
+bottele_ban_hang_dalymmo.com/
+|- api/          # Serverless handlers (bot, cron)
+|- config/       # ENV loader, constants, i18n
+|- lib/          # Telegram client, DB, HTTP layer
+|- models/       # Data-access functions
+|- services/     # Business logic and workflows
+|- scripts/      # Helper scripts (webhook, import)
+|- utils/        # Parsers, keyboard builders, logger
+```
+
+---
+
+## Quick Start
+
+### Prerequisites
+
+- Node.js `18+`
+- npm
+- PostgreSQL/Supabase project
+- Telegram bot token from BotFather
+
+### Install
 
 ```bash
+git clone https://github.com/leanhminh2104/bottele_ban_hang_dalymmo.com.git
+cd bottele_ban_hang_dalymmo.com
+npm install
+```
+
+### Run Local
+
+```bash
+npm run local
+```
+
+Default local URL:
+
+- `http://localhost:2104`
+
+---
+
+## Environment Variables
+
+Create `.env.local` (or `.env`):
+
+```env
 TOKEN=your_telegram_bot_token
 SUPABASE_URL=your_supabase_url
 SUPABASE_KEY=your_supabase_service_key
@@ -54,9 +126,9 @@ CRON_KEY=your_secret_cron_key
 ADMIN_ID=your_telegram_user_id
 ```
 
-Tuy chon tinh chinh mang Telegram:
+Optional Telegram tuning:
 
-```bash
+```env
 TELEGRAM_TIMEOUT_MS=16000
 TELEGRAM_MAX_RETRIES=3
 TELEGRAM_RETRY_BASE_MS=600
@@ -64,87 +136,43 @@ TELEGRAM_RETRY_MAX_MS=5000
 TELEGRAM_API_BASE=https://api.telegram.org
 ```
 
-Luu y:
+Notes:
 
-- `ADMIN_ID` la Telegram numeric user id cua admin tong
-- Khong commit `.env` va `.env.local` len Git
+- `ADMIN_ID` must be a numeric Telegram user ID.
+- Keep `.env` and `.env.local` private and out of Git.
 
-## Cai dat Local day du
+---
 
-1. Clone source:
+## Webhook Setup
 
-```bash
-git clone https://github.com/leanhminh2104/bottele_ban_hang_dalymmo.com.git
-cd bottele_ban_hang_dalymmo.com
-```
-
-2. Cai dependency:
-
-```bash
-npm install
-```
-
-3. Tao va cau hinh `.env.local` theo mau ben tren.
-
-4. Chay local:
-
-```bash
-npm run local
-```
-
-Mac dinh app local:
-
-- `http://localhost:2104`
-
-5. Expose local de Telegram goi webhook (vi du dung ngrok):
+For local testing, expose your local server (example with ngrok):
 
 ```bash
 ngrok http 2104
 ```
 
-6. Set webhook:
+Then set Telegram webhook:
 
 ```bash
-npm run webhook:set -- https://<your-ngrok-or-domain>/api/bot
+npm run webhook:set -- https://<your-public-domain>/api/bot
 ```
 
-7. Khoi tao schema (lan dau):
+---
 
-- Dang nhap Telegram bang tai khoan co `user_id = ADMIN_ID`
-- Gui `/start`
-- Neu bot bao chua co schema, gui `/setup` (hoac bam nut khoi tao)
+## Cron Setup
 
-## Deploy Vercel day du
-
-1. Push code len GitHub.
-2. Import repo vao Vercel.
-3. Khai bao ENV trong Project Settings (toan bo bien bat buoc).
-4. Deploy.
-5. Set webhook production:
-
-```bash
-npm run webhook:set -- https://<your-vercel-domain>/api/bot
-```
-
-6. Kiem tra:
-
-- Gui `/start` tren Telegram
-- Kiem tra log Function tren Vercel
-
-## Cau hinh Cron day du
-
-Endpoint cron:
+Endpoint:
 
 - `GET /api/cron?key=<CRON_KEY>`
-- Hoac gui header: `x-cron-key: <CRON_KEY>`
+- or header `x-cron-key: <CRON_KEY>`
 
-Muc dich cron:
+Cron handles:
 
-- Kiem tra thanh toan topup
-- Giai phong hold het han
-- Huy don hoa don qua han va thong bao user
+- payment checks
+- expired hold release
+- pending invoice expiration and user notifications
 
-Vi du test thu cong:
+Manual test:
 
 ```bash
 curl "https://<your-domain>/api/cron?key=<CRON_KEY>"
@@ -156,53 +184,76 @@ PowerShell:
 Invoke-WebRequest "https://<your-domain>/api/cron?key=<CRON_KEY>"
 ```
 
-Khuyen nghi lich chay:
+Recommended interval:
 
-- Moi 1-2 phut moi lan chay (tu nhu cau tai he thong)
+- every 1-2 minutes
 
-Ban co the dung:
+---
 
-- cron-job.org / EasyCron / server cron rieng
-- Hoac Vercel Cron (neu ban truyen duoc `key` qua URL)
+## Full Deployment on Vercel
 
-## Cach dung bot
+1. Push your code to GitHub.
+2. Import repository in Vercel.
+3. Add all required ENV variables.
+4. Deploy project.
+5. Set production webhook:
 
-### Lenh user
+```bash
+npm run webhook:set -- https://<your-vercel-domain>/api/bot
+```
 
-- `/start`: mo menu chinh
-- `/language` hoac `/lang`: doi ngon ngu (`vi` / `en`)
-- `/nap`: vao quy trinh nap tien
-- `/info`, `/me`, `/thongtin`: xem thong tin tai khoan
-- `/biendong`, `/balancehistory`, `/lichsusodu`: lich su bien dong so du
-- `/lsdonhang`, `/orders`, `/lichsudonhang`: lich su don hang
+6. First boot in Telegram:
+- Login with account matching `ADMIN_ID`
+- Send `/start`
+- If schema is missing, run `/setup` (or `/init`, `/initdb`)
 
-### Lenh admin
+---
 
-- `/settings`: xem cau hinh he thong
-- `/setacb <token>`: cap nhat token ACB
-- `/addadmin <telegram_user_id>`: them admin
-- `/import`: huong dan import ton kho
-- `/ping`: kiem tra do tre
-- `/cpu`: xem thong tin CPU
-- `/restart`: thong bao trang thai restart
-- `/setup`, `/init`, `/initdb`: khoi tao schema (khi can)
+## Bot Commands
 
-### Luong thao tac user
+### User Commands
 
-1. Bam `Mua tai khoan`
-2. Chon danh muc, chon server/san pham, chon so luong
-3. Chon thanh toan bang so du hoac hoa don
-4. Nhan tai khoan sau khi thanh toan thanh cong
-5. Vao `Don hang cua toi` de theo doi va gui yeu cau bao hanh
+- `/start` - open main menu
+- `/language` or `/lang` - switch language
+- `/nap` - top-up flow
+- `/info`, `/me`, `/thongtin` - personal profile
+- `/biendong`, `/balancehistory`, `/lichsusodu` - balance history
+- `/lsdonhang`, `/orders`, `/lichsudonhang` - order history
 
-### Luong thao tac admin
+### Admin Commands
 
-1. Vao menu quan tri
-2. Quan ly danh muc va san pham
-3. Nhap kho thu cong hoac bang file `.txt`
-4. Xu ly don va yeu cau bao hanh
+- `/setup`, `/init`, `/initdb` - initialize schema when needed
+- `/settings` - show current settings
+- `/setacb <token>` - update ACB token
+- `/addadmin <telegram_user_id>` - add admin user
+- `/import` - import guide
+- `/ping` - latency check
+- `/cpu` - CPU info
+- `/restart` - restart message
 
-## Scripts ho tro
+---
+
+## Operational Flow
+
+### User Purchase Flow
+
+1. Open Buy menu.
+2. Choose category and product.
+3. Select quantity.
+4. Choose payment method (balance or invoice).
+5. Receive account after successful processing.
+6. Use order menu for tracking and warranty requests.
+
+### Admin Flow
+
+1. Open admin menu.
+2. Configure bank/payment settings.
+3. Manage catalog and stock.
+4. Process warranty requests and support tasks.
+
+---
+
+## Scripts
 
 Set webhook:
 
@@ -210,19 +261,85 @@ Set webhook:
 npm run webhook:set -- https://your-domain/api/bot
 ```
 
-Import account tu file:
+Import account list from text file:
 
 ```bash
 npm run import:accounts -- path/to/accounts.txt
 ```
 
-## Bao mat va van hanh
+---
 
-- Khong commit thong tin nhay cam (`TOKEN`, DB URL, keys)
-- Nen xoay token dinh ky neu nghi ro ri
-- Nen bat monitor/log cho endpoint `api/bot` va `api/cron`
-- Neu Telegram timeout gian doan, tang `TELEGRAM_TIMEOUT_MS` va `TELEGRAM_MAX_RETRIES`
+## Security Checklist
 
-## License
+- Do not commit secrets (`TOKEN`, DB credentials, API keys).
+- Rotate critical keys periodically.
+- Protect cron endpoint with strong `CRON_KEY`.
+- Monitor Vercel logs for `api/bot` and `api/cron`.
+- Increase Telegram timeout/retry values if your network is unstable.
 
-MIT License. Xem chi tiet tai file `LICENSE`.
+---
+
+## Copyright and Credits
+
+- Copyright (c) 2026 **dalymmo.com - LAMDev**
+- Developed and maintained by **LAMDev**
+- Official domain: **dalymmo.com**
+
+This repository uses the MIT License. See [LICENSE](./LICENSE).
+
+---
+
+## Vietnamese (Tieng Viet)
+
+Bot Telegram bán hàng cho **dalymmo.com**, code bởi **LAMDev**.
+
+### Tính năng chính
+
+- Webhook bot: `api/bot`
+- Cron xử lý nền: `api/cron`
+- Hỗ trợ đa ngôn ngữ `vi/en`
+- Luồng mua hàng đầy đủ: danh mục -> sản phẩm -> số lượng -> thanh toán
+- Quản lý đơn và bảo hành
+- Admin quản lý danh mục, sản phẩm, tồn kho, import `.txt`
+
+### Cài đặt nhanh
+
+```bash
+git clone https://github.com/leanhminh2104/bottele_ban_hang_dalymmo.com.git
+cd bottele_ban_hang_dalymmo.com
+npm install
+npm run local
+```
+
+Tạo `.env.local`:
+
+```env
+TOKEN=...
+SUPABASE_URL=...
+SUPABASE_KEY=...
+SUPABASE_DB_URL=...
+CRON_KEY=...
+ADMIN_ID=...
+```
+
+### Cấu hình webhook
+
+```bash
+npm run webhook:set -- https://<domain>/api/bot
+```
+
+### Cấu hình cron
+
+- URL: `/api/cron?key=<CRON_KEY>`
+- Hoặc header: `x-cron-key: <CRON_KEY>`
+- Nên chạy mỗi 1-2 phút
+
+### Lệnh quan trọng
+
+- User: `/start`, `/language`, `/nap`, `/info`, `/orders`
+- Admin: `/setup`, `/settings`, `/setacb`, `/addadmin`, `/import`, `/ping`, `/cpu`
+
+### Bản quyền
+
+- Copyright (c) 2026 **dalymmo.com - LAMDev**
+- MIT License tại [LICENSE](./LICENSE)
