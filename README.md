@@ -7,7 +7,7 @@
 ![Vercel](https://img.shields.io/badge/Vercel-Serverless-000000?style=for-the-badge&logo=vercel&logoColor=white)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Supabase-336791?style=for-the-badge&logo=postgresql&logoColor=white)
 ![Telegram](https://img.shields.io/badge/Telegram-Bot%20API-26A5E4?style=for-the-badge&logo=telegram&logoColor=white)
-![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
+![License](https://img.shields.io/badge/license-MIT-green?style=for-the-badge)
 
 Production-ready Telegram sales bot with top-up, order workflow, stock management, and warranty handling.
 
@@ -32,7 +32,10 @@ Built for **dalymmo.com** by **LAMDev**.
 - [Bot Commands](#bot-commands)
 - [Operational Flow](#operational-flow)
 - [Scripts](#scripts)
-- [Security Checklist](#security-checklist)
+- [Donate](#donate)
+- [Contributing](#contributing)
+- [Security](#security)
+- [Support](#support)
 - [Copyright and Credits](#copyright-and-credits)
 
 ## Version Details
@@ -49,14 +52,16 @@ Built for **dalymmo.com** by **LAMDev**.
 
 | Date | Commit | Type | Summary |
 | --- | --- | --- | --- |
-| 2026-04-01 | `84e64de` | Docs | README revamp: bilingual docs, full setup, cron, usage |
-| 2026-04-01 | `2286b47` | Docs | Expanded docs: full setup, cron, usage, copyright |
+| 2026-04-01 | `HEAD` | Docs | Full docs upgrade: VN parity, donate, contributing, security, support |
+| 2026-04-01 | `b392519` | Docs | Added version details, changelog, and split Vietnamese README |
+| 2026-04-01 | `84e64de` | Docs | Revamped README: bilingual docs, full setup, cron, usage |
+| 2026-04-01 | `2286b47` | Docs | Expanded documentation: full installation, cron setup, usage |
 | 2026-04-01 | `cfcc2fd` | Docs | Updated README and LICENSE |
-| 2026-04-01 | `7869941` | Core | Imported bot source code to repository |
+| 2026-04-01 | `7869941` | Core | Imported full bot source code to repository |
 | 2026-03-29 | `3cab930` | Docs | Updated README with beta status message |
 | 2026-03-29 | `69ffe70` | Core | Initial commit |
 
-For full details, see [CHANGELOG.md](./CHANGELOG.md).
+For release-oriented details, see [CHANGELOG.md](./CHANGELOG.md).
 
 ## Features
 
@@ -71,13 +76,13 @@ For full details, see [CHANGELOG.md](./CHANGELOG.md).
 
 - Browse categories and products
 - Buy with balance or invoice transfer flow
-- View account info, balance history, order history
-- Create warranty request
+- View account info, balance history, and order history
+- Create warranty requests
 
 ### Admin Features
 
 - Configure payment and bank settings
-- Manage categories, products, stock
+- Manage categories, products, and stock
 - Import stock from text and `.txt` file
 - Handle warranty approvals and rejections
 
@@ -97,7 +102,7 @@ bottele_ban_hang_dalymmo.com/
 |- models/       # Data-access functions
 |- services/     # Business logic and workflows
 |- scripts/      # Helper scripts (webhook, import)
-|- utils/        # Parsers, keyboard builders, logger
+|- utils/        # Parser, keyboard builders, logger
 ```
 
 ## Quick Start
@@ -129,7 +134,7 @@ Default local URL:
 
 ## Environment Variables
 
-Create `.env.local` (or `.env`):
+Create `.env.local` (or `.env`) with:
 
 ```env
 TOKEN=your_telegram_bot_token
@@ -269,13 +274,33 @@ Import account list from text file:
 npm run import:accounts -- path/to/accounts.txt
 ```
 
-## Security Checklist
+## Donate
 
-- Do not commit secrets (`TOKEN`, DB credentials, API keys).
-- Rotate critical keys periodically.
-- Protect cron endpoint with strong `CRON_KEY`.
-- Monitor Vercel logs for `api/bot` and `api/cron`.
-- Increase Telegram timeout/retry values if your network is unstable.
+If this project helps your business, you can support ongoing maintenance.
+
+| Method | Details |
+| --- | --- |
+| Bank | MB Bank |
+| Account number | `2104200637` |
+| Account holder | `LE VAN ANH MINH` |
+| QR | ![MB QR](https://img.vietqr.io/image/MB-2104200637-qr_only.png) |
+
+## Contributing
+
+We welcome contributions from the community.
+
+- Read [CONTRIBUTING.md](./CONTRIBUTING.md) before opening a pull request.
+- Keep changes focused and include clear descriptions.
+- Update docs/changelog for user-visible changes.
+
+## Security
+
+For vulnerability reporting and response policy, see [SECURITY.md](./SECURITY.md).
+
+## Support
+
+- GitHub Issues: use issues for bugs and feature requests.
+- Operational support: check your Vercel logs (`api/bot`, `api/cron`) first, then provide logs and reproduction steps.
 
 ## Copyright and Credits
 
@@ -283,4 +308,4 @@ npm run import:accounts -- path/to/accounts.txt
 - Developed and maintained by **LAMDev**
 - Official domain: **dalymmo.com**
 
-This repository uses the MIT License. See [LICENSE](./LICENSE).
+This repository is licensed under MIT. See [LICENSE](./LICENSE).
