@@ -1,6 +1,8 @@
 # BotTele Sales Bot for dalymmo.com
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fleanhminh2104%2Fbottele_ban_hang_dalymmo.com&env=TOKEN,SUPABASE_URL,SUPABASE_KEY,SUPABASE_DB_URL,CRON_KEY,ADMIN_ID)
+![Version](https://img.shields.io/badge/version-0.1.0-blue?style=for-the-badge)
+![Status](https://img.shields.io/badge/status-beta-orange?style=for-the-badge)
 ![Node.js](https://img.shields.io/badge/Node.js-18%2B-339933?style=for-the-badge&logo=node.js&logoColor=white)
 ![Vercel](https://img.shields.io/badge/Vercel-Serverless-000000?style=for-the-badge&logo=vercel&logoColor=white)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Supabase-336791?style=for-the-badge&logo=postgresql&logoColor=white)
@@ -11,17 +13,15 @@ Production-ready Telegram sales bot with top-up, order workflow, stock managemen
 
 Built for **dalymmo.com** by **LAMDev**.
 
----
-
 ## Language
 
-- English (default): this section
-- Vietnamese: jump to [Vietnamese (Tieng Viet)](#vietnamese-tieng-viet)
-
----
+- English (default): this file
+- Vietnamese: [README-vn.md](./README-vn.md)
 
 ## Table of Contents
 
+- [Version Details](#version-details)
+- [Update History](#update-history)
 - [Features](#features)
 - [Architecture](#architecture)
 - [Quick Start](#quick-start)
@@ -34,9 +34,29 @@ Built for **dalymmo.com** by **LAMDev**.
 - [Scripts](#scripts)
 - [Security Checklist](#security-checklist)
 - [Copyright and Credits](#copyright-and-credits)
-- [Vietnamese (Tieng Viet)](#vietnamese-tieng-viet)
 
----
+## Version Details
+
+| Field | Value |
+| --- | --- |
+| Application version | `0.1.0` |
+| Release channel | `beta` |
+| Main branch | `main` |
+| Last documented update | `2026-04-01` |
+| Changelog file | [CHANGELOG.md](./CHANGELOG.md) |
+
+## Update History
+
+| Date | Commit | Type | Summary |
+| --- | --- | --- | --- |
+| 2026-04-01 | `84e64de` | Docs | README revamp: bilingual docs, full setup, cron, usage |
+| 2026-04-01 | `2286b47` | Docs | Expanded docs: full setup, cron, usage, copyright |
+| 2026-04-01 | `cfcc2fd` | Docs | Updated README and LICENSE |
+| 2026-04-01 | `7869941` | Core | Imported bot source code to repository |
+| 2026-03-29 | `3cab930` | Docs | Updated README with beta status message |
+| 2026-03-29 | `69ffe70` | Core | Initial commit |
+
+For full details, see [CHANGELOG.md](./CHANGELOG.md).
 
 ## Features
 
@@ -67,8 +87,6 @@ Built for **dalymmo.com** by **LAMDev**.
 - Retry backoff with jitter for unstable network conditions
 - Cron-safe processing with `CRON_KEY` authentication
 
----
-
 ## Architecture
 
 ```text
@@ -81,8 +99,6 @@ bottele_ban_hang_dalymmo.com/
 |- scripts/      # Helper scripts (webhook, import)
 |- utils/        # Parsers, keyboard builders, logger
 ```
-
----
 
 ## Quick Start
 
@@ -110,8 +126,6 @@ npm run local
 Default local URL:
 
 - `http://localhost:2104`
-
----
 
 ## Environment Variables
 
@@ -141,8 +155,6 @@ Notes:
 - `ADMIN_ID` must be a numeric Telegram user ID.
 - Keep `.env` and `.env.local` private and out of Git.
 
----
-
 ## Webhook Setup
 
 For local testing, expose your local server (example with ngrok):
@@ -156,8 +168,6 @@ Then set Telegram webhook:
 ```bash
 npm run webhook:set -- https://<your-public-domain>/api/bot
 ```
-
----
 
 ## Cron Setup
 
@@ -188,8 +198,6 @@ Recommended interval:
 
 - every 1-2 minutes
 
----
-
 ## Full Deployment on Vercel
 
 1. Push your code to GitHub.
@@ -206,8 +214,6 @@ npm run webhook:set -- https://<your-vercel-domain>/api/bot
 - Login with account matching `ADMIN_ID`
 - Send `/start`
 - If schema is missing, run `/setup` (or `/init`, `/initdb`)
-
----
 
 ## Bot Commands
 
@@ -231,8 +237,6 @@ npm run webhook:set -- https://<your-vercel-domain>/api/bot
 - `/cpu` - CPU info
 - `/restart` - restart message
 
----
-
 ## Operational Flow
 
 ### User Purchase Flow
@@ -251,8 +255,6 @@ npm run webhook:set -- https://<your-vercel-domain>/api/bot
 3. Manage catalog and stock.
 4. Process warranty requests and support tasks.
 
----
-
 ## Scripts
 
 Set webhook:
@@ -267,8 +269,6 @@ Import account list from text file:
 npm run import:accounts -- path/to/accounts.txt
 ```
 
----
-
 ## Security Checklist
 
 - Do not commit secrets (`TOKEN`, DB credentials, API keys).
@@ -277,8 +277,6 @@ npm run import:accounts -- path/to/accounts.txt
 - Monitor Vercel logs for `api/bot` and `api/cron`.
 - Increase Telegram timeout/retry values if your network is unstable.
 
----
-
 ## Copyright and Credits
 
 - Copyright (c) 2026 **dalymmo.com - LAMDev**
@@ -286,60 +284,3 @@ npm run import:accounts -- path/to/accounts.txt
 - Official domain: **dalymmo.com**
 
 This repository uses the MIT License. See [LICENSE](./LICENSE).
-
----
-
-## Vietnamese (Tieng Viet)
-
-Bot Telegram bán hàng cho **dalymmo.com**, code bởi **LAMDev**.
-
-### Tính năng chính
-
-- Webhook bot: `api/bot`
-- Cron xử lý nền: `api/cron`
-- Hỗ trợ đa ngôn ngữ `vi/en`
-- Luồng mua hàng đầy đủ: danh mục -> sản phẩm -> số lượng -> thanh toán
-- Quản lý đơn và bảo hành
-- Admin quản lý danh mục, sản phẩm, tồn kho, import `.txt`
-
-### Cài đặt nhanh
-
-```bash
-git clone https://github.com/leanhminh2104/bottele_ban_hang_dalymmo.com.git
-cd bottele_ban_hang_dalymmo.com
-npm install
-npm run local
-```
-
-Tạo `.env.local`:
-
-```env
-TOKEN=...
-SUPABASE_URL=...
-SUPABASE_KEY=...
-SUPABASE_DB_URL=...
-CRON_KEY=...
-ADMIN_ID=...
-```
-
-### Cấu hình webhook
-
-```bash
-npm run webhook:set -- https://<domain>/api/bot
-```
-
-### Cấu hình cron
-
-- URL: `/api/cron?key=<CRON_KEY>`
-- Hoặc header: `x-cron-key: <CRON_KEY>`
-- Nên chạy mỗi 1-2 phút
-
-### Lệnh quan trọng
-
-- User: `/start`, `/language`, `/nap`, `/info`, `/orders`
-- Admin: `/setup`, `/settings`, `/setacb`, `/addadmin`, `/import`, `/ping`, `/cpu`
-
-### Bản quyền
-
-- Copyright (c) 2026 **dalymmo.com - LAMDev**
-- MIT License tại [LICENSE](./LICENSE)
