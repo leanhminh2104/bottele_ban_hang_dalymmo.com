@@ -136,6 +136,14 @@ Default local URL:
 
 Create `.env.local` (or `.env`) with:
 
+```bash
+cp .env.example .env.local
+# Windows (PowerShell/CMD):
+copy .env.example .env.local
+```
+
+Then edit values:
+
 ```env
 TOKEN=your_telegram_bot_token
 SUPABASE_URL=your_supabase_url

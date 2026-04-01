@@ -136,6 +136,14 @@ URL local mặc định:
 
 Tạo `.env.local` (hoặc `.env`) với:
 
+```bash
+cp .env.example .env.local
+# Windows (PowerShell/CMD):
+copy .env.example .env.local
+```
+
+Sau đó điền giá trị thật:
+
 ```env
 TOKEN=your_telegram_bot_token
 SUPABASE_URL=your_supabase_url
